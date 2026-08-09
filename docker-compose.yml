@@ -1,0 +1,37 @@
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=SooyooshDb1771
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqldata:/var/opt/mssql
+
+  mongodb:
+    image: mongo:7
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    ports:
+       - "5672:5672" # RabbitMQ
+       - "15672:15672" # Management UI
+
+    volumes:
+       - rabbitmqdata:/var/lib/rabbitmq
+
+volumes:
+  sqldata:
+  mongodata: 
+  rabbitmqdata:
