@@ -31,6 +31,77 @@ services:
     volumes:
        - rabbitmqdata:/var/lib/rabbitmq
 
+  auctionservice:
+    image: auctionservice:latest
+    build:
+      context: . 
+      dockerfile: AuctionService/Dockerfile
+    environment:
+       - ASPNETCORE_ENVIRONMENT=Development
+       - ASPNETCORE_URLS=http://+:80
+       - RabbitMQ__Host=rabbitmq
+       - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=AuctionDb;User Id=sa;Password=SooyooshDb1771;TrustServerCertificate=True
+       - IdentityServiceUrl=http://identityservice
+    ports:
+      - "5192:80"
+    depends_on:
+      - sqlserver
+      - rabbitmq
+  
+  searchservice:
+    image: searchservice:latest
+    build:
+      context: . 
+      dockerfile: SearchService/Dockerfile
+    environment:
+       - ASPNETCORE_ENVIRONMENT=Development
+       - ASPNETCORE_URLS=http://+:80
+       - RabbitMQ__Host=rabbitmq
+       - ConnectionStrings__MongoDbConnection=mongodb://mongodb:27017
+       - AuctionServiceUrl=http://auctionservice
+    ports:
+      - "7291:80"
+    depends_on:
+      - mongodb
+      - rabbitmq
+
+  identityservice:
+    image: identityservice:latest
+    build:
+      context: . 
+      dockerfile: src/IdentityService/Dockerfile
+    environment:
+       - ASPNETCORE_ENVIRONMENT=Docker
+       - ASPNETCORE_URLS=http://+:80  
+       - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=IdentityServiceDb;User Id=sa;Password=SooyooshDb1771;TrustServerCertificate=True
+      
+    ports:
+      - "5001:80"
+    depends_on:
+      - sqlserver
+
+  gatewayservice:
+    image: gatewayservice:latest
+    build:
+      context: . 
+      dockerfile: GateWayService/Dockerfile
+    environment:
+       - ASPNETCORE_ENVIRONMENT=Docker
+       - ASPNETCORE_URLS=http://+:80  
+       
+      
+    ports:
+      - "5106:80"
+  
+
+
+
+
+
+
+   
+
+
 volumes:
   sqldata:
   mongodata: 
