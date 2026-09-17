@@ -20,6 +20,12 @@ namespace SearchService.Consumer
                 Model = message.Model,
                 Color = message.Color,
                 Year = message.Year,
+
+                Seller = message.Seller,
+                AuctionEnd = message.AuctionEnd,
+                ImageUrl = message.ImageUrl,
+                Milleage = message.Milleage,
+                ReservePrice = message.ReservePrice,
                 UpdatedAt = DateTime.UtcNow
             };
 

@@ -22,6 +22,9 @@ namespace SearchService.Data
 
             var count = await DB.CountAsync<Item>();
 
+
+
+            Console.WriteLine($"Items already in Mongo: {count}");
             //if (count == 0)
             //{
 
@@ -36,7 +39,7 @@ namespace SearchService.Data
 
             //}
 
-         
+
 
             using var scope = application.Services.CreateScope();
 
@@ -44,7 +47,7 @@ namespace SearchService.Data
 
             var items = await httpClient.GetItemsForSearchDb();
 
-            Console.WriteLine(items.Count + " returned from the auction service");
+            Console.WriteLine($"Items returned from AuctionService: {items.Count}");
 
             if (items.Count > 0) await DB.SaveAsync(items);
 

@@ -77,7 +77,13 @@ namespace AuctionService.Controllers
                 Make = auction.Item.Make,
                 Model = auction.Item.Model,
                 Color = auction.Item.Color,
-                Year = auction.Item.Year
+                Year = auction.Item.Year,
+
+                Seller = auction.Seller,
+                AuctionEnd = auction.AuctionEnd,
+                ImageUrl = auction.Item.ImageUrl,
+                Milleage = auction.Item.Milleage,
+                ReservePrice = auction.ReservePrice
             });
             var result = await _dbContext.SaveChangesAsync() > 0;
 

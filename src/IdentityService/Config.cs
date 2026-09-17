@@ -33,20 +33,36 @@ public static class Config
                      ClientSecrets = new[] {new Secret("NotASecret".Sha256() ) },
                      AllowedGrantTypes = {GrantType.ResourceOwnerPassword}
             },
+            //new Client
+            //{
+            //    ClientId = "angApp",
+            //    ClientName = "angApp",
+            //    ClientSecrets = {new Secret("secret".Sha256( ) ) },
+            //    AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
+            //    RequirePkce = false,
+            //    RedirectUris = {"http://localhost:3000/api/auth/callback/id-server"},
+            //    AllowOfflineAccess = true,
+            //    AllowedScopes ={"openid", "profile", "auctionApp"},
+            //    AccessTokenLifetime=3600*24*30,
+            //    AlwaysIncludeUserClaimsInIdToken = true,
+
+            //}
             new Client
             {
-                ClientId = "angApp",
-                ClientName = "angApp",
-                ClientSecrets = {new Secret("secret".Sha256( ) ) },
-                AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
-                RequirePkce = false,
-                RedirectUris = {"http://localhost:3000/api/auth/callback/id-server"},
-                AllowOfflineAccess = true,
-                AllowedScopes ={"openid", "profile", "auctionApp"},
-                AccessTokenLifetime=3600*24*30
-
+                 ClientId = "angApp",
+                 ClientName = "Angular App",
+                 AllowedGrantTypes = GrantTypes.Code,
+                 RequirePkce = true,
+                 RequireClientSecret = false,
+                 RedirectUris ={"http://localhost:4200/auth-callback"},
+                 PostLogoutRedirectUris ={"http://localhost:4200"},
+                 AllowedCorsOrigins={  "http://localhost:4200" },
+                 AllowOfflineAccess = true,
+                 AllowedScopes ={"openid","profile","auctionApp"},
+                 AccessTokenLifetime = 3600 * 24 * 30,
+                 IdentityTokenLifetime = 3600,
+                 AlwaysIncludeUserClaimsInIdToken = true,
             }
-
 
 
         };
