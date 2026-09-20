@@ -8,6 +8,7 @@ COPY Carsties.sln .
 COPY AuctionService/AuctionService.csproj AuctionService/
 COPY SearchService/SearchService.csproj SearchService/
 COPY GateWayService/GateWayService.csproj GateWayService/
+COPY BiddingService/BiddingService.csproj BiddingService/
 COPY Contracts/Contracts.csproj Contracts/
 COPY src/IdentityService/IdentityService.csproj src/IdentityService/
 
