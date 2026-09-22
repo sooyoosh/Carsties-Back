@@ -9,6 +9,7 @@ COPY AuctionService/AuctionService.csproj AuctionService/
 COPY SearchService/SearchService.csproj SearchService/
 COPY GateWayService/GateWayService.csproj GateWayService/
 COPY BiddingService/BiddingService.csproj BiddingService/
+COPY NotificationService/NotificationService.csproj NotificationService/
 COPY Contracts/Contracts.csproj Contracts/
 COPY src/IdentityService/IdentityService.csproj src/IdentityService/
 

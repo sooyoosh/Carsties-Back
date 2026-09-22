@@ -119,7 +119,19 @@ services:
       - mongodb
       - rabbitmq
 
-
+  notifservice:
+    image: notifservice:latest
+    build:
+      context: . 
+      dockerfile: NotificationService/Dockerfile
+    environment:
+       - ASPNETCORE_ENVIRONMENT=Development
+       - ASPNETCORE_URLS=http://+:80
+       - RabbitMQ__Host=rabbitmq
+    ports:
+      - "5184:80"
+    depends_on:
+      - rabbitmq
 
 
    
